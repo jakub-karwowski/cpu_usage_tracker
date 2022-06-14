@@ -29,11 +29,14 @@ void message_destroy(Message* const msg) {
     free(msg);
 }
 
-void message_show(const Message* const msg) {
-    printf("%s\n", msg->payload);
+char* message_get_payload(Message* const msg) {
+    if (msg == NULL) {
+        return NULL;
+    }
+    return msg->payload;
 }
 
-char* message_get_payload(Message* const msg) {
+const char* message_get_payload_const(const Message* const msg) {
     if (msg == NULL) {
         return NULL;
     }

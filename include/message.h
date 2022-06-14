@@ -10,9 +10,9 @@ Message* message_create(const char data[]);
 
 void message_destroy(Message* msg);
 
-void message_show(const Message* msg);
-
 char* message_get_payload(Message* msg);
+
+const char* message_get_payload_const(const Message* msg);
 
 size_t message_get_payload_size(const Message* msg);
 

@@ -1,5 +1,11 @@
-CC=gcc
-CFLAGS=-I$(IDIR) -Wall -Wextra
+CC?=gcc
+CFLAGS=-I$(IDIR)
+
+ifeq ($(CC),gcc)
+	CFLAGS += -Wall -Wextra
+else ifeq ($(CC), clang)
+	CFLAGS += -Weverything -Wno-vla -Wno-disabled-macro-expansion
+endif
 
 IDIR =./include
 ODIR=./build
@@ -9,10 +15,10 @@ BIN=tracker.out
 
 LIBS= -pthread
 
-_DEPS = message.h queue.h sized_array.h
+_DEPS = message.h queue.h sized_array.h statef.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main.o message.o queue.o sized_array.o
+_OBJ = main.o message.o queue.o sized_array.o statef.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
